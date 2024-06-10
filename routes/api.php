@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\BookGenreController;
+use App\Http\Controllers\ToBeReadListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,21 +31,32 @@ Route::post('v1/register', [AuthController::class, 'register']);
 
 // Book Routes
 Route::get('v1/books', [BookController::class, 'index']);
-Route::get('v1/books/{book}', [BookController::class, 'show']);
+Route::get('v1/books/{id}', [BookController::class, 'show']);
 Route::post('v1/books', [BookController::class, 'store']);
-Route::put('v1/books/{book}', [BookController::class, 'update']);
-Route::delete('v1/books/{book}', [BookController::class, 'destroy']);
+Route::put('v1/books/{id}', [BookController::class, 'update']);
+Route::delete('v1/books/{id}', [BookController::class, 'destroy']);
 
 // Review Routes
 Route::get('v1/reviews', [ReviewController::class, 'index']);
-Route::get('v1/reviews/{review}', [ReviewController::class, 'show']);
+Route::get('v1/reviews/{id}', [ReviewController::class, 'show']);
 Route::post('v1/reviews', [ReviewController::class, 'store']);
-Route::put('v1/reviews/{review}', [ReviewController::class, 'update']);
-Route::delete('v1/reviews/{review}', [ReviewController::class, 'destroy']);
+Route::put('v1/reviews/{id}', [ReviewController::class, 'update']);
+Route::delete('v1/reviews/{id}', [ReviewController::class, 'destroy']);
 
 // Genre Routes
 Route::get('v1/genres', [GenreController::class, 'index']);
-Route::get('v1/genres/{genre}', [GenreController::class, 'show']);
+Route::get('v1/genres/{id}', [GenreController::class, 'show']);
 Route::post('v1/genres', [GenreController::class, 'store']);
-Route::put('v1/genres/{genre}', [GenreController::class, 'update']);
-Route::delete('v1/genres/{genre}', [GenreController::class, 'destroy']);
+Route::put('v1/genres/{id}', [GenreController::class, 'update']);
+Route::delete('v1/genres/{id}', [GenreController::class, 'destroy']);
+
+
+//To-Be-Read-List Routes
+Route::get('v1/to-be-read-list', [ToBeReadListController::class, 'index']);
+Route::post('v1/to-be-read-list', [ToBeReadListController::class, 'store']);
+Route::delete('v1/to-be-read-list/{id}', [ToBeReadListController::class, 'destroy']);
+
+
+//BookGenre Routes
+Route::get('/books/{book_id}/genres', [BookGenreController::class, 'genresByBook']);
+Route::get('/genres/{genre_id}/books', [BookGenreController::class, 'booksByGenre']);
