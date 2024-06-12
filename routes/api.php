@@ -21,7 +21,6 @@ use App\Http\Controllers\ToBeReadListController;
 */
 
 // Auth Routes
-
 Route::get('v1/login', [AuthController::class, 'login_get']);
 Route::post('v1/login', [AuthController::class, 'login_post']);
 Route::get('v1/logout', [AuthController::class, 'logout']);
