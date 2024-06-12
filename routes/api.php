@@ -58,5 +58,5 @@ Route::delete('v1/to-be-read-list/{id}', [ToBeReadListController::class, 'destro
 
 
 //BookGenre Routes
-Route::get('/books/{book_id}/genres', [BookGenreController::class, 'genresByBook']);
-Route::get('/genres/{genre_id}/books', [BookGenreController::class, 'booksByGenre']);
+Route::get('v1/books/{book_id}/genres', [BookGenreController::class, 'genresByBook']);
+Route::get('v1/genres/{genre_id}/books', [BookGenreController::class, 'booksByGenre']);
