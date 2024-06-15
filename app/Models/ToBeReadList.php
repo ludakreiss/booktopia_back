@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ToBeReadList extends Model
 {
     use HasFactory;
+    protected $table = 'to_be_read_list';
 
     protected  $fillable = [
         'user_id', 'book_id',

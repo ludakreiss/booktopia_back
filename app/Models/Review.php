@@ -16,7 +16,6 @@ class Review extends Model
         'rating',
         'review_text',
         'created_at',
-        'review_text',
     ];
 }
 

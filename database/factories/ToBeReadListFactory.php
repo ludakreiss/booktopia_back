@@ -27,8 +27,8 @@ class ToBeReadListFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),  
-            'book_id' => Book::factory(),  
+            'user_id' => function () {return User::inRandomOrder()->first()->id;},  
+            'book_id' => function () {return Book::inRandomOrder()->first()->id;},  
             'created_at' => now(),
         ];
     }

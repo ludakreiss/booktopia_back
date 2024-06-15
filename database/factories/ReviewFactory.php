@@ -27,8 +27,11 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'book_id' => Book::factory(),
+            'user_id' => function () {return User::inRandomOrder()->first()->id;},
+            'book_id' => function () use (&$book) {
+                            $book = Book::inRandomOrder()->first();
+                            return $book->id;},
+            'title' =>function () use (&$book) {return $book->title;},
             'rating' => $this->faker->numberBetween(1, 5), 
             'review_text' => $this->faker->paragraph(), 
             'created_at' => now(),

@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'profile_picture' => 'booktopia_back/public/default-profile.png', // or we can generate random picture: $faker->imageUrl(200, 200, 'people')
             'remember_token' => Str::random(10),
         ];
     }
