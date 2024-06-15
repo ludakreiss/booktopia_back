@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\BookGenreController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ToBeReadListController;
 
 /*
@@ -59,3 +60,6 @@ Route::delete('v1/to-be-read-list/{id}', [ToBeReadListController::class, 'destro
 //BookGenre Routes
 Route::get('v1/books/{book_id}/genres', [BookGenreController::class, 'genresByBook']);
 Route::get('v1/genres/{genre_id}/books', [BookGenreController::class, 'booksByGenre']);
+
+//Search Routes
+Route::get('v1/search', [SearchController::class, 'search']);
