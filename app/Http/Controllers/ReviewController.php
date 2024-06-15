@@ -30,13 +30,15 @@ class ReviewController extends Controller
         $request->validate([
             'user_id' => 'required|integer|exists:users,id',
             'book_id' => 'required|integer|exists:books,id',
+            'title' => 'required|string|max:255',
             'rating' => 'required|integer|between:1,5',
-            'review_text' => 'nullable|string',
+            'review_text' => 'nullable|string|max:1024',
         ]);
 
         $review = Review::create([
             'user_id' => $request->user_id,
             'book_id' => $request->book_id,
+            'title'=>$request->title,
             'rating' => $request->rating,
             'review_text' => $request->review_text,
         ]);
@@ -54,8 +56,9 @@ class ReviewController extends Controller
         $request->validate([
             'user_id' => 'required|integer|exists:users,id',
             'book_id' => 'required|integer|exists:books,id',
+            'title' => 'required|string|max:255',
             'rating' => 'required|integer|between:1,5',
-            'review_text' => 'nullable|string',
+            'review_text' => 'nullable|string|max:1024',
         ]);
 
         $review->update($request->all());

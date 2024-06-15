@@ -18,7 +18,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login_post', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login_post', 'register','getAllUsers']]);
     }
 
     public function login_post(Request $request)
@@ -57,6 +57,11 @@ class AuthController extends Controller
         return response()->json(new DataResponse($responseData));
     }
 
+    public function getAllUsers()
+    {
+        $users = User::all();
+        return response()->json(new DataResponse($users));
+    }
 
 
     public function register(Request $request)
