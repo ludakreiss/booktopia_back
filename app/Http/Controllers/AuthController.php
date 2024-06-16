@@ -69,8 +69,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:64',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'age' => 'required|integer|min:5',
+            'password' => 'required|string|min:8'
         ]);
 
         DB::transaction(function() use($request) {
@@ -81,7 +80,6 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'age' => $request->age, 
                 'isAdmin' => 1,
                 'profile_picture' => 'default-profile.png',
             ]);
