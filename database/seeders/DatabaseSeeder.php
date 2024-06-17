@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
                      BookGenreSeeder::class,
                      UserSeeder::class,
                      ReviewSeeder::class,
-                     ToBeReadListSeeder::class]);
+                     ToBeReadSeeder::class]);
 
     }
 }
