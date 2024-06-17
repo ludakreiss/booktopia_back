@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->string('author', 255);
             $table->text('description')->nullable();
-            $table->string('book_cover', 255)->nullable();
+            $table->string('book_cover')->nullable();
             $table->timestamps();
         });
     }

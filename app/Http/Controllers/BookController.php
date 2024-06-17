@@ -30,9 +30,18 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-        ]);
+            'book_cover'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048'
 
-        $book = Book::create($request->all());
+        ]);
+        $imageName = time().'.'.$request->book_cover->extension();
+        $request->book_cover->storeAs('public/book_covers', $imageName); 
+
+         
+        $book = Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'book_cover' => 'storage/book_covers/'.$imageName, 
+         ]);
         return response()->json(new DataResponse($book), 201);
     }
 
