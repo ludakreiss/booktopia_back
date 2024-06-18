@@ -7,6 +7,7 @@ use App\Models\Book;
 
 class SearchController extends Controller
 {
+
     public function default_search(Request $request){
         $query = Book::query();
         $data = $request->input('search');
@@ -34,7 +35,7 @@ class SearchController extends Controller
         }
         return $query->get();
     }
-    public function discription_search(Request $request){
+    public function description_search(Request $request){
         $query = Book::query();
         $data = $request->input('search');
         if($data) {
