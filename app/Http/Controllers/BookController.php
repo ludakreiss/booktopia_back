@@ -30,31 +30,50 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'book_cover'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-
+            'book_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-        $imageName = time().'.'.$request->book_cover->extension();
-        $request->book_cover->storeAs('public/book_covers', $imageName); 
-
-         
+    
+        $bookCoverPath = null;
+    
+        if ($request->hasFile('book_cover')) {
+            $imageName = time().'.'.$request->book_cover->extension();
+            $request->book_cover->storeAs('public/book_covers', $imageName);
+            $bookCoverPath = 'storage/book_covers/'.$imageName;
+        }
+    
         $book = Book::create([
-        'title' => $request->title,
-        'author' => $request->author,
-        'book_cover' => 'storage/book_covers/'.$imageName, 
-         ]);
+            'title' => $request->title,
+            'author' => $request->author,
+            'description' => $request->description,
+            'book_cover' => $bookCoverPath, 
+        ]);
+    
         return response()->json(new DataResponse($book), 201);
     }
+    
 
-    public function update(Request $request, $id)
-    {
-        $book = Book::find($id);
-        if (!$book) {
-            return response()->json(new ErrorResponse('Book not found'), 404);
-        }
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'author' => 'required|string|max:255'
+         
+    //     ]);
 
-        $book->update($request->all());
-        return response()->json(new DataResponse($book));
-    }
+    //     $book = Book::create($request->all());
+    //     return response()->json(new DataResponse($book), 201);
+    // }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $book = Book::find($id);
+    //     if (!$book) {
+    //         return response()->json(new ErrorResponse('Book not found'), 404);
+    //     }
+
+    //     $book->update($request->all());
+    //     return response()->json(new DataResponse($book));
+    // }
 
     public function destroy($id)
     {
