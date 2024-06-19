@@ -66,7 +66,4 @@ Route::get('v1/books/{book_id}/genres', [BookGenreController::class, 'genresByBo
 Route::get('v1/genres/{genre_id}/books', [BookGenreController::class, 'booksByGenre']);
 
 // Search Routes
-Route::get('v1/search/default', [SearchController::class, 'default_search']);
-Route::get('v1/search/title', [SearchController::class, 'title_search']);
-Route::get('v1/search/author', [SearchController::class, 'author_search']);
-Route::get('v1/search/description', [SearchController::class, 'description_search']);
+Route::get('v1/search/', [SearchController::class, 'search']);
