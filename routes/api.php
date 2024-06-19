@@ -28,6 +28,8 @@ Route::get('v1/logout', [AuthController::class, 'logout']);
 Route::get('v1/refresh', [AuthController::class, 'refresh']);
 Route::post('v1/register', [AuthController::class, 'register']);
 Route::get('v1/users', [AuthController::class, 'getAllUsers']);
+Route::post('v1/update-profile', [AuthController::class, 'updateProfile']);
+Route::delete('v1/delete-user', [AuthController::class, 'deleteUser']);
 
 
 

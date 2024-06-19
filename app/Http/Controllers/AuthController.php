@@ -102,6 +102,44 @@ class AuthController extends Controller
         return response()->json(new DataResponse($responseData));
     }
 
+    public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+
+    $request->validate([
+        'name' => 'required|string|max:64',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+    ]);
+
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->save();
+
+    $responseData = new UserResponse($user);
+
+    return response()->json(new DataResponse($responseData));
+}
+
+
+public function deleteUser(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            DB::transaction(function() use ($user) {
+                $user->delete();
+            });
+
+            Auth::logout();
+
+            return response()->json(new SuccessResponse('User deleted successfully.'));
+        }
+
+        return response()->json(new ErrorResponse('User not found.'), 404);
+    }
+
+
+
     /**
      * Returns the expiration time of the current token in seconds
      * @return int Expiration time
