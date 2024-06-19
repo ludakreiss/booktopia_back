@@ -8,14 +8,32 @@ use App\Models\DataResponse;
 use App\Models\SuccessResponse;
 use App\Models\ErrorResponse;
 
+/**
+ * Class ReviewController
+ *
+ * Controller for managing reviews.
+ *
+ * @package App\Http\Controllers
+ */
 class ReviewController extends Controller
 {
+    /**
+     * Display a listing of reviews.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $reviews = Review::all();
         return response()->json(new DataResponse($reviews));
     }
 
+    /**
+     * Display the specified review.
+     *
+     * @param int $id The ID of the review.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         $review = Review::find($id);
@@ -25,6 +43,12 @@ class ReviewController extends Controller
         return response()->json(new DataResponse($review));
     }
 
+    /**
+     * Store a newly created review in storage.
+     *
+     * @param \Illuminate\Http\Request $request The request object containing the review data.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -38,7 +62,7 @@ class ReviewController extends Controller
         $review = Review::create([
             'user_id' => $request->user_id,
             'book_id' => $request->book_id,
-            'title'=>$request->title,
+            'title' => $request->title,
             'rating' => $request->rating,
             'review_text' => $request->review_text,
         ]);
@@ -46,6 +70,13 @@ class ReviewController extends Controller
         return response()->json(new DataResponse($review), 201);
     }
 
+    /**
+     * Update the specified review in storage.
+     *
+     * @param \Illuminate\Http\Request $request The request object containing the updated review data.
+     * @param int $id The ID of the review to update.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request, $id)
     {
         $review = Review::find($id);
@@ -65,6 +96,12 @@ class ReviewController extends Controller
         return response()->json(new DataResponse($review));
     }
 
+    /**
+     * Remove the specified review from storage.
+     *
+     * @param int $id The ID of the review.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         $review = Review::find($id);
