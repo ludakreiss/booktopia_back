@@ -86,7 +86,7 @@ class AuthController extends Controller
 
         });
 
-        return response()->json(new SuccessResponse());
+        return response()->json(new SuccessResponse(),201);
     }
 
 
